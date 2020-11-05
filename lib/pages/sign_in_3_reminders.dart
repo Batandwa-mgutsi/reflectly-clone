@@ -20,7 +20,7 @@ class _SignInRemindersState extends State<SignInReminders> {
     '88% more likely',
     style: TextStyle(color: Colors.black),
   );
-  Future<void> ReminderDialog() async {
+  Future<void> reminderDialog() async {
     return showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -155,7 +155,7 @@ class _SignInRemindersState extends State<SignInReminders> {
                 FlatButton(
                   key: Key('signin3_touchable_noThanks'),
                   onPressed: () {
-                    ReminderDialog();
+                    reminderDialog();
                   },
                   child: Text('NO THANKS'),
                 ),

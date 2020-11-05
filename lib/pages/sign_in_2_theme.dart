@@ -7,7 +7,6 @@ import 'package:my_reflectly/transition_manager/custom_manager.dart';
 
 import 'package:provider/provider.dart';
 
-
 class SignInTheme extends StatefulWidget {
   static String id = 'SignInTheme';
 
@@ -36,8 +35,6 @@ class _SignInThemeState extends State<SignInTheme> {
   }
 
   Widget _buildListItem(BuildContext context, int index) {
-
-
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 0),
       child: Container(
@@ -55,11 +52,12 @@ class _SignInThemeState extends State<SignInTheme> {
       ),
     );
   }
+
   bool onWillPop() {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
-    context.read<OnBoardingValue>().setValue(screenWidth*.30);
+    context.read<OnBoardingValue>().setValue(screenWidth * .30);
     widget.controller.previousPage(
       duration: Duration(milliseconds: 500),
       curve: Curves.easeInExpo,
@@ -69,12 +67,12 @@ class _SignInThemeState extends State<SignInTheme> {
 
   @override
   Widget build(BuildContext context) {
-
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return WillPopScope(
       onWillPop: () => Future.sync(onWillPop),
       child: Scaffold(
+        key: Key('signin2_view_signin2'),
         body: Container(
           width: double.infinity,
           height: double.infinity,
@@ -88,7 +86,6 @@ class _SignInThemeState extends State<SignInTheme> {
             margin: EdgeInsets.fromLTRB(20, 40, 20, 10),
             child: Column(
               children: <Widget>[
-
                 SizedBox(
                   height: 80,
                 ),
@@ -96,14 +93,16 @@ class _SignInThemeState extends State<SignInTheme> {
                   'Boom - magic color change!',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 23),
-                ),SizedBox(
+                  key: Key('signin2_text_magicColorChange'),
+                ),
+                SizedBox(
                   height: 10,
                 ),
                 Text(
                   'CAN BE CHANGED LATER IN SETTINGS',
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 16, color: Colors.black38
-                  ),
+                  style: TextStyle(fontSize: 16, color: Colors.black38),
+                  key: Key('signin2_text_canBeChangedLater'),
                 ),
                 Flexible(
                   child: SizedBox(
@@ -111,11 +110,8 @@ class _SignInThemeState extends State<SignInTheme> {
                   ),
                 ),
                 Container(
-                  constraints:BoxConstraints(
-                    maxHeight: 90
-                  ) ,
+                  constraints: BoxConstraints(maxHeight: 90),
                   child: ScrollSnapList(
-
                     onItemFocus: _onItemFocus,
                     itemSize: 100,
                     itemBuilder: _buildListItem,
@@ -125,10 +121,9 @@ class _SignInThemeState extends State<SignInTheme> {
                     initialIndex: 0,
                   ),
                 ),
-                Spacer(
-
-                ),
+                Spacer(),
                 RaisedButton(
+                  key: Key('signin2_touchable_next'),
                   disabledColor: Colors.black12.withOpacity(.1),
                   disabledTextColor: Colors.black38,
                   color: Colors.white,
@@ -139,14 +134,11 @@ class _SignInThemeState extends State<SignInTheme> {
                   padding:
                       EdgeInsets.symmetric(horizontal: 100.0, vertical: 20.0),
                   onPressed: () {
-
-
-                    context.read<OnBoardingValue>().setValue(screenWidth*.44);
+                    context.read<OnBoardingValue>().setValue(screenWidth * .44);
 
                     widget.controller.nextPage(
                         duration: Duration(milliseconds: 500),
                         curve: Curves.ease);
-
                   },
                   child: Text(
                     'NEXT',
@@ -161,7 +153,6 @@ class _SignInThemeState extends State<SignInTheme> {
                 SizedBox(
                   height: 43,
                 ),
-
               ],
             ),
           ),

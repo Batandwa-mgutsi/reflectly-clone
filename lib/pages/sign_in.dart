@@ -116,15 +116,13 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-
-
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-
 
     return WillPopScope(
       onWillPop: () => Future.sync(onWillPop),
       child: Scaffold(
+        key: Key('signin_view_signin'),
         body: context.watch<HasAnimationRun>().hasAnimationRun
             ? Container(
                 width: double.infinity,
@@ -171,6 +169,7 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
                       ),
                       Spacer(),
                       RaisedButton(
+                          key: Key('signin_touchable_hiReflectly'),
                           color: Colors.white,
                           elevation: 0,
                           shape: RoundedRectangleBorder(
@@ -200,6 +199,7 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
                         height: 20,
                       ),
                       FlatButton(
+                        key: Key('signin_touchable_alreadyHaveAnAccount'),
                         onPressed: () {
                           Provider.of<DPImagesProvider>(context, listen: false)
                               .fillUpList();
@@ -278,6 +278,7 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
                       ScaleTransition(
                         scale: _scaleAnimation,
                         child: RaisedButton(
+                            key: Key('signin_touchable_hiReflectly'),
                             color: Colors.white,
                             elevation: 0,
                             shape: RoundedRectangleBorder(
@@ -293,7 +294,9 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
                                   duration: Duration(milliseconds: 500),
                                   curve: Curves.easeOut);
 
-                              context.read<OnBoardingValue>().setValue(screenWidth*.30);
+                              context
+                                  .read<OnBoardingValue>()
+                                  .setValue(screenWidth * .30);
                             },
                             child: Text(
                               'HI, REFLECTLY!',
@@ -311,8 +314,11 @@ class _SignInState extends State<SignIn> with SingleTickerProviderStateMixin {
                       ScaleTransition(
                         scale: _scaleAnimation2,
                         child: FlatButton(
+                          key: Key('signin_touchable_alreadyHaveAnAccount'),
                           onPressed: () {
-                            Provider.of<DPImagesProvider>(context,listen: false).fillUpList();
+                            Provider.of<DPImagesProvider>(context,
+                                    listen: false)
+                                .fillUpList();
                             Navigator.pushReplacementNamed(context, Moments.id);
                           },
                           child: Text(

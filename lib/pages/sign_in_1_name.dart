@@ -14,7 +14,7 @@ class SignInName extends StatefulWidget {
   bool isEnteringName;
   final VoidCallback reverseAnimation;
 
-  SignInName(this.controller, this.isEnteringName,this.reverseAnimation);
+  SignInName(this.controller, this.isEnteringName, this.reverseAnimation);
   @override
   _SignInNameState createState() => _SignInNameState();
 }
@@ -30,14 +30,14 @@ class _SignInNameState extends State<SignInName> {
 
   @override
   Widget build(BuildContext context) {
-
-    bool isKeyboardOff =  MediaQuery.of(context).viewInsets.bottom == 0;
+    bool isKeyboardOff = MediaQuery.of(context).viewInsets.bottom == 0;
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
     return WillPopScope(
       onWillPop: () => Future.sync(onWillPop),
       child: Scaffold(
+        key: Key('signin1_view_signin1'),
         body: Container(
           width: double.infinity,
           height: double.infinity,
@@ -52,14 +52,15 @@ class _SignInNameState extends State<SignInName> {
             child: Column(
               children: <Widget>[
                 AnimatedContainer(
-                  duration: Duration(milliseconds:700),
-                  height:isKeyboardOff ? 80:10,
+                  duration: Duration(milliseconds: 700),
+                  height: isKeyboardOff ? 80 : 10,
                   curve: Curves.ease,
                 ),
                 Text(
                   'So nice to meet you! What do your friends call you?',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 23),
+                  key: Key('signin1_text_greeter'),
                 ),
                 Flexible(
                   child: SizedBox(
@@ -76,31 +77,25 @@ class _SignInNameState extends State<SignInName> {
                     child: Stack(
                       children: [
                         TextFormField(
-                          onEditingComplete: () {
-                          },
-                          onChanged: (value){
-
-                            if( value.length<=20){
+                          key: Key('signin1_input_nickname'),
+                          onEditingComplete: () {},
+                          onChanged: (value) {
+                            if (value.length <= 20) {
                               context.read<UserName>().setUserName(value);
                             }
-
                           },
-
                           onFieldSubmitted: (value) {
-
                             // sets the value of username
-                            if( value.length<=20){
+                            if (value.length <= 20) {
                               context.read<UserName>().setUserName(value);
                             }
 
                             //closes keyboard on submit
-                            FocusScope.of(context).requestFocus(new FocusNode());
+                            FocusScope.of(context)
+                                .requestFocus(new FocusNode());
                           },
-
-
                           maxLines: 1,
-                          initialValue: context.watch<UserName>().userName ,
-
+                          initialValue: context.watch<UserName>().userName,
                           textAlign: TextAlign.center,
                           cursorColor: Colors.purpleAccent,
                           style: TextStyle(
@@ -111,31 +106,29 @@ class _SignInNameState extends State<SignInName> {
                           decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: 'Your nickname...',
-                              hintStyle:
-                                  TextStyle(color: Colors.white70, fontSize: 20)),
+                              hintStyle: TextStyle(
+                                  color: Colors.white70, fontSize: 20)),
                         ),
-                        if( context.watch<UserName>().userName!='') TextCounter(
-
-                         textCount: context.watch<UserName>().userName,
-
-                        )
+                        if (context.watch<UserName>().userName != '')
+                          TextCounter(
+                            textCount: context.watch<UserName>().userName,
+                          )
                       ],
                     ),
                   ),
                 ),
-
                 Flexible(
                   child: AnimatedContainer(
-                   duration: Duration(seconds: 1),
+                    duration: Duration(seconds: 1),
                     height: 100,
                   ),
                 ),
-
                 Spacer(),
                 Visibility(
-                  visible:  isKeyboardOff ? true : false,
+                  visible: isKeyboardOff ? true : false,
                   maintainSize: false,
                   child: RaisedButton(
+                    key: Key('signin1_touchable_continue'),
                     disabledColor: Colors.black12.withOpacity(.1),
                     disabledTextColor: Colors.black38,
                     color: Colors.white,
@@ -143,23 +136,19 @@ class _SignInNameState extends State<SignInName> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(100.0),
                     ),
-                    padding: EdgeInsets.symmetric(
-                        horizontal: 80.0, vertical: 20.0),
-                    onPressed:
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 80.0, vertical: 20.0),
+                    onPressed: context.watch<UserName>().userName == ''
+                        ? null
+                        : () {
+                            context
+                                .read<OnBoardingValue>()
+                                .setValue(screenWidth * .37);
 
-                    context.watch<UserName>().userName==''? null:()
-
-
-
-                    {
-
-                      context.read<OnBoardingValue>().setValue(screenWidth*.37);
-
-                      widget.controller.nextPage(
-                          duration: Duration(milliseconds:500),
-                          curve: Curves.ease );
-
-                    },
+                            widget.controller.nextPage(
+                                duration: Duration(milliseconds: 500),
+                                curve: Curves.ease);
+                          },
                     child: Text(
                       'CONTINUE',
                       style: TextStyle(
@@ -184,7 +173,7 @@ class _SignInNameState extends State<SignInName> {
 }
 
 class TextCounter extends StatelessWidget {
-   TextCounter({
+  TextCounter({
     this.textCount,
     Key key,
   }) : super(key: key);
@@ -197,23 +186,19 @@ class TextCounter extends StatelessWidget {
       top: 0,
       right: 0,
       child: Transform.translate(
-        offset: Offset(
-       20,-20
-                         ),
+        offset: Offset(20, -20),
         child: Container(
-
           decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10)
-          ),
+              color: Colors.white, borderRadius: BorderRadius.circular(10)),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              '${textCount.length}/20',style: TextStyle(
-              color: kPrimaryColor,
-              fontSize: 14,
-              fontWeight: FontWeight.w700
-            ),
+              '${textCount.length}/20',
+              key: Key('signin1_text_textCounter'),
+              style: TextStyle(
+                  color: kPrimaryColor,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w700),
             ),
           ),
         ),

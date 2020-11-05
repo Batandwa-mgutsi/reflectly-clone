@@ -24,6 +24,8 @@ import 'pages/daily_positives.dart';
 import 'package:provider/provider.dart';
 import 'package:my_reflectly/providers/add_note_providers.dart';
 
+import 'package:testsweets/testsweets.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -37,8 +39,6 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-
-
 
     return MultiProvider(
       providers: [
@@ -54,29 +54,18 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider.value(
           value: ActivitiesMoments(),
         ),
-        ChangeNotifierProvider.value(
-            value: IsPopUpOn()),
-        ChangeNotifierProvider(
-            create:(_)=> DailyPositivesList()),
-        ChangeNotifierProvider.value(
-            value:  ShowDailyPositivesDialog()),
-        ChangeNotifierProvider.value(
-            value:  DPImagesProvider()),
-        ChangeNotifierProvider.value(
-            value:  ActivitiesIsMoreThanZero()),
-        ChangeNotifierProvider.value(
-            value:  FeelingsIsMoreThanZero()),
-        ChangeNotifierProvider.value(
-            value:  UserName()),
-        ChangeNotifierProvider.value(
-            value: HasAnimationRun()),
-        ChangeNotifierProvider.value(
-            value: OnBoardingValue()),
-
+        ChangeNotifierProvider.value(value: IsPopUpOn()),
+        ChangeNotifierProvider(create: (_) => DailyPositivesList()),
+        ChangeNotifierProvider.value(value: ShowDailyPositivesDialog()),
+        ChangeNotifierProvider.value(value: DPImagesProvider()),
+        ChangeNotifierProvider.value(value: ActivitiesIsMoreThanZero()),
+        ChangeNotifierProvider.value(value: FeelingsIsMoreThanZero()),
+        ChangeNotifierProvider.value(value: UserName()),
+        ChangeNotifierProvider.value(value: HasAnimationRun()),
+        ChangeNotifierProvider.value(value: OnBoardingValue()),
       ],
       child: MaterialApp(
         darkTheme: ThemeData.dark(),
-
         theme: ThemeData.dark().copyWith(
           primaryColor: Colors.purple,
           scaffoldBackgroundColor: kBackgroundColor,
@@ -89,8 +78,8 @@ class MyApp extends StatelessWidget {
           DailyPositives.id: (context) => DailyPositives(),
 //          Account.id: (context) => Account(),
           SettingsPage.id: (context) => SettingsPage(),
-
-      },
+        },
+        builder: (context, child) => TestSweets.builder(context, child),
       ),
     );
   }

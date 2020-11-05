@@ -25,6 +25,7 @@ class _SignInRemindersState extends State<SignInReminders> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          key: Key('signin3_general_reminderDialog'),
           titlePadding: EdgeInsets.only(top: 40),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
@@ -33,15 +34,18 @@ class _SignInRemindersState extends State<SignInReminders> {
             'ARE YOU SURE?',
             textAlign: TextAlign.center,
             style: TextStyle(color: Colors.red, fontSize: 25),
+            key: Key('signin3_text_title'),
           ),
           content: Text(
             'Studies show that people who get daily reminders are 88% more likely to keep their new habit!',
             textAlign: TextAlign.center,
             style: TextStyle(color: Colors.black),
+            key: Key('signin3_text_body'),
           ),
           backgroundColor: Colors.white,
           actions: <Widget>[
             FlatButton(
+              key: Key('signin3_touchable_close'),
               child: Icon(
                 Icons.close,
                 color: Colors.grey,
@@ -51,13 +55,15 @@ class _SignInRemindersState extends State<SignInReminders> {
               },
             ),
             FlatButton(
+              key: Key('signin3_touchable_done'),
               child: Icon(
                 Icons.done,
                 color: Colors.red,
               ),
               onPressed: () {
                 Navigator.of(context).pop();
-                Provider.of<DPImagesProvider>(context,listen: false).fillUpList();
+                Provider.of<DPImagesProvider>(context, listen: false)
+                    .fillUpList();
                 Navigator.pushReplacementNamed(context, Moments.id);
               },
             ),
@@ -66,13 +72,14 @@ class _SignInRemindersState extends State<SignInReminders> {
       },
     );
   }
+
   bool onWillPop() {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
-    context.read<OnBoardingValue>().setValue(screenWidth*.37);
+    context.read<OnBoardingValue>().setValue(screenWidth * .37);
     widget.controller.previousPage(
-      duration: Duration(milliseconds:500),
+      duration: Duration(milliseconds: 500),
       curve: Curves.easeInExpo,
     );
     return false;
@@ -83,6 +90,7 @@ class _SignInRemindersState extends State<SignInReminders> {
     return WillPopScope(
       onWillPop: () => Future.sync(onWillPop),
       child: Scaffold(
+        key: Key('signin3_view_signin3'),
         body: Container(
           width: double.infinity,
           height: double.infinity,
@@ -98,10 +106,9 @@ class _SignInRemindersState extends State<SignInReminders> {
             margin: EdgeInsets.fromLTRB(20, 50, 20, 10),
             child: Column(
               children: <Widget>[
-
-              SizedBox(
-                height: 80,
-              ),
+                SizedBox(
+                  height: 80,
+                ),
                 Text(
                   'Last thing- want me to send you small reminders?',
                   textAlign: TextAlign.center,
@@ -110,6 +117,7 @@ class _SignInRemindersState extends State<SignInReminders> {
                     fontSize: 20.0,
                     fontWeight: FontWeight.w900,
                   ),
+                  key: Key('signin3_text_oneLastThing'),
                 ),
 
                 SizedBox(
@@ -117,6 +125,7 @@ class _SignInRemindersState extends State<SignInReminders> {
                 ),
 //                Image.network(src),
                 RaisedButton(
+                  key: Key('signin3_touchable_yesPlease'),
                   color: Colors.white,
                   elevation: 0,
                   shape: RoundedRectangleBorder(
@@ -125,10 +134,9 @@ class _SignInRemindersState extends State<SignInReminders> {
                   padding:
                       EdgeInsets.symmetric(horizontal: 80.0, vertical: 20.0),
                   onPressed: () {
-
-                  Navigator.pushReplacementNamed(context, Moments.id);
-                  Provider.of<DPImagesProvider>(context,listen: false).fillUpList();
-
+                    Navigator.pushReplacementNamed(context, Moments.id);
+                    Provider.of<DPImagesProvider>(context, listen: false)
+                        .fillUpList();
                   },
                   child: Text(
                     'YES PLEASE!',
@@ -145,6 +153,7 @@ class _SignInRemindersState extends State<SignInReminders> {
                 ),
 
                 FlatButton(
+                  key: Key('signin3_touchable_noThanks'),
                   onPressed: () {
                     ReminderDialog();
                   },
@@ -153,7 +162,6 @@ class _SignInRemindersState extends State<SignInReminders> {
                 SizedBox(
                   height: 41,
                 ),
-
               ],
             ),
           ),

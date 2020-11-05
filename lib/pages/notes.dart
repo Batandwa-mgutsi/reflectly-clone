@@ -28,18 +28,17 @@ class Moments extends StatefulWidget {
   _MomentsState createState() => _MomentsState();
 }
 
-class _MomentsState extends State<Moments>  with SingleTickerProviderStateMixin{
-
+class _MomentsState extends State<Moments> with SingleTickerProviderStateMixin {
   AnimationController _animationController;
 
   Animation<double> _fadeAnimation;
-  Animation<Offset>   _slideAnimation;
+  Animation<Offset> _slideAnimation;
 
   Animation<double> _fadeAnimation2;
-  Animation<Offset>   _slideAnimation2;
+  Animation<Offset> _slideAnimation2;
 
   Animation<double> _fadeAnimation3;
-  Animation<Offset>   _slideAnimation3;
+  Animation<Offset> _slideAnimation3;
 
   Animation _scaleAnimation;
   Animation<double> _fadeAnimation4;
@@ -67,17 +66,14 @@ class _MomentsState extends State<Moments>  with SingleTickerProviderStateMixin{
     _animationController = AnimationController(
       vsync: this,
       duration: Duration(seconds: 3),
-
-
     );
     _animationController.forward();
 
-    _fadeAnimation =CurvedAnimation(
-      curve: Interval(.1, .2, curve: Curves.ease),
-      parent: _animationController
-    );
+    _fadeAnimation = CurvedAnimation(
+        curve: Interval(.1, .2, curve: Curves.ease),
+        parent: _animationController);
 
-    _slideAnimation =  Tween<Offset>(
+    _slideAnimation = Tween<Offset>(
       begin: Offset(0, .3),
       end: Offset.zero,
     ).animate(CurvedAnimation(
@@ -85,13 +81,11 @@ class _MomentsState extends State<Moments>  with SingleTickerProviderStateMixin{
       curve: Interval(.1, .3, curve: Curves.ease),
     ));
 
-
-    _fadeAnimation2 =CurvedAnimation(
+    _fadeAnimation2 = CurvedAnimation(
         curve: Interval(.3, .5, curve: Curves.ease),
-        parent: _animationController
-    );
+        parent: _animationController);
 
-    _slideAnimation2 =  Tween<Offset>(
+    _slideAnimation2 = Tween<Offset>(
       begin: Offset(.5, 0),
       end: Offset.zero,
     ).animate(CurvedAnimation(
@@ -99,13 +93,11 @@ class _MomentsState extends State<Moments>  with SingleTickerProviderStateMixin{
       curve: Interval(.3, .5, curve: Curves.ease),
     ));
 
-
-    _fadeAnimation3 =CurvedAnimation(
+    _fadeAnimation3 = CurvedAnimation(
         curve: Interval(.5, .7, curve: Curves.ease),
-        parent: _animationController
-    );
+        parent: _animationController);
 
-    _slideAnimation3 =  Tween<Offset>(
+    _slideAnimation3 = Tween<Offset>(
       begin: Offset(.5, 0),
       end: Offset.zero,
     ).animate(CurvedAnimation(
@@ -115,15 +107,10 @@ class _MomentsState extends State<Moments>  with SingleTickerProviderStateMixin{
 
     _scaleAnimation = CurvedAnimation(
         curve: Interval(.7, .8, curve: Curves.ease),
-        parent: _animationController
-    );
-    _fadeAnimation4 =CurvedAnimation(
+        parent: _animationController);
+    _fadeAnimation4 = CurvedAnimation(
         curve: Interval(.7, .8, curve: Curves.ease),
-        parent: _animationController
-    );
-
-
-
+        parent: _animationController);
 
     _isVisible = true;
     _hideBottomNavController = ScrollController();
@@ -147,35 +134,34 @@ class _MomentsState extends State<Moments>  with SingleTickerProviderStateMixin{
     );
   }
 
-
   @override
-  dispose(){
+  dispose() {
     super.dispose();
     _animationController.dispose();
   }
-
-
 
   Future<void> _showNoteDraggable(IconMoment iconMoment) async {
     return showDialog<void>(
       context: context,
       builder: (BuildContext context) {
-        return OpenNoteDraggable(draggableItem: iconMoment,);
+        return OpenNoteDraggable(
+          draggableItem: iconMoment,
+        );
       },
     );
   }
 
-  Future<void> _showImageDraggable(IconMoment iconMoment,int index) async {
+  Future<void> _showImageDraggable(IconMoment iconMoment, int index) async {
     return showDialog<void>(
       context: context,
       builder: (BuildContext context) {
-        return OpenImageDraggable(draggableItem: iconMoment,index: index,);
+        return OpenImageDraggable(
+          draggableItem: iconMoment,
+          index: index,
+        );
       },
     );
   }
-
-
-
 
   Future<void> _showMomentAlertDialog(int index) async {
     return showDialog<void>(
@@ -238,11 +224,10 @@ class _MomentsState extends State<Moments>  with SingleTickerProviderStateMixin{
     );
   }
 
-
   String _determineTimeOfDay() {
     int timeOfDay = DateTime.now().toLocal().hour;
 
-    if (timeOfDay < 12 || timeOfDay==0) {
+    if (timeOfDay < 12 || timeOfDay == 0) {
       return 'morning';
     } else if (timeOfDay < 18) {
       return 'afternoon';
@@ -263,6 +248,7 @@ class _MomentsState extends State<Moments>  with SingleTickerProviderStateMixin{
 
     return SafeArea(
       child: Scaffold(
+        key: Key('moments_view_moments'),
         body: Stack(
           children: <Widget>[
             ListView(
@@ -284,7 +270,7 @@ class _MomentsState extends State<Moments>  with SingleTickerProviderStateMixin{
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Container(
-                                margin: EdgeInsets.only(left: screenWidth*.1),
+                                margin: EdgeInsets.only(left: screenWidth * .1),
                                 child: Text(
                                   'Good $timeOfDay,',
                                   textAlign: TextAlign.left,
@@ -296,7 +282,7 @@ class _MomentsState extends State<Moments>  with SingleTickerProviderStateMixin{
                                 height: 5,
                               ),
                               Container(
-                                margin: EdgeInsets.only(left: screenWidth*.1),
+                                margin: EdgeInsets.only(left: screenWidth * .1),
                                 child: Text(
                                   '${context.watch<UserName>().userName}',
                                   textAlign: TextAlign.left,
@@ -338,7 +324,8 @@ class _MomentsState extends State<Moments>  with SingleTickerProviderStateMixin{
                                     Material(
                                       color: Colors.black.withOpacity(.1),
                                       shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(100)),
+                                          borderRadius:
+                                              BorderRadius.circular(100)),
                                       child: Padding(
                                         padding: const EdgeInsets.all(10.0),
                                         child: Icon(
@@ -351,20 +338,22 @@ class _MomentsState extends State<Moments>  with SingleTickerProviderStateMixin{
                                       width: 20,
                                     ),
                                     Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Row(
                                           children: [
                                             Text(
                                               'DAILY REFLECTION',
                                               style: TextStyle(
-                                                  color:
-                                                      Colors.black.withOpacity(.3),
+                                                  color: Colors.black
+                                                      .withOpacity(.3),
                                                   fontSize: 12),
                                             ),
                                             Icon(
                                               Icons.arrow_forward,
-                                              color: Colors.black.withOpacity(.3),
+                                              color:
+                                                  Colors.black.withOpacity(.3),
                                             )
                                           ],
                                         ),
@@ -374,7 +363,8 @@ class _MomentsState extends State<Moments>  with SingleTickerProviderStateMixin{
                                         Text(
                                           'Self-Love',
                                           style: TextStyle(
-                                              color: Colors.white, fontSize: 16),
+                                              color: Colors.white,
+                                              fontSize: 16),
                                         ),
                                       ],
                                     )
@@ -387,7 +377,7 @@ class _MomentsState extends State<Moments>  with SingleTickerProviderStateMixin{
                       ),
                     ),
                     SizedBox(
-                      height:80,
+                      height: 80,
                     ),
                     CustomScrollView(
                       reverse: true,
@@ -399,119 +389,109 @@ class _MomentsState extends State<Moments>  with SingleTickerProviderStateMixin{
                             (context, index) {
                               List<IconMoment> _providerData =
                                   context.watch<StoredMoments>().items;
-                              return
-
-                                _providerData[index].file != null  ?
-
-
-                                Stack(
-                                  children: [
-                                    Container(
-                                      margin: EdgeInsets.only(right: 30,top: 30,bottom: 30),
-                                      alignment: Alignment.centerRight,
-                                      child: FadeTransition(
-
-                                        opacity:  _fadeAnimation4,
-                                        child: ScaleTransition(
-                                          scale:_scaleAnimation,
-                                          child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(20),
-                                            child: GestureDetector(
-                                              onTap:(){
-                                                _showImageDraggable(context
-                                                    .read<StoredMoments>()
-                                                    .items[index],index);
-                              },
-                                              child: Image.file(
-                                                _providerData[index].file,
-                                                height: screenHeight/3,
-                                                width: screenWidth*.55,
-                                                fit: BoxFit.cover,
-
+                              return _providerData[index].file != null
+                                  ? Stack(
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                              right: 30, top: 30, bottom: 30),
+                                          alignment: Alignment.centerRight,
+                                          child: FadeTransition(
+                                            opacity: _fadeAnimation4,
+                                            child: ScaleTransition(
+                                              scale: _scaleAnimation,
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                                child: GestureDetector(
+                                                  onTap: () {
+                                                    _showImageDraggable(
+                                                        context
+                                                            .read<
+                                                                StoredMoments>()
+                                                            .items[index],
+                                                        index);
+                                                  },
+                                                  child: Image.file(
+                                                    _providerData[index].file,
+                                                    height: screenHeight / 3,
+                                                    width: screenWidth * .55,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
                                               ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                    ),
-                                  Transform.translate(
-                                    offset: Offset(30,50),
-                                    child: Icon(
-                                        Icons.image,
-                                        color: Colors.grey,
-
-                                    ),
-                                  )
-                                  ]
-                                  ,
-                                )
-
-
-                                    :
-
-                                FadeTransition(
-                                opacity: _fadeAnimation3,
-                                child: SlideTransition(
-                                  position: _slideAnimation3,
-                                  child:
-
-
-                                  Slidable(
-                                    key: ValueKey('slideItem$index'),
-                                    controller: slidableController,
-                                    actionPane: SlidableDrawerActionPane(),
-                                    actionExtentRatio: 0.25,
-                                    child:
-
-
-
-                                    GestureDetector(
-                                      onTap: () {
-
-                                          _showNoteDraggable(context
-                                              .read<StoredMoments>()
-                                              .items[index]);
-
-                                      },
-
-                                      child:TextNote(
-                                        screenWidth: screenWidth,
-                                        screenHeight: screenHeight,
-                                        icon: _providerData[index].moodIcon,
-                                        title: _providerData[index].title,
-                                        activities: _providerData[index].activities,
-                                        feelings: _providerData[index].feelings,
-                                        notes: _providerData[index].addSomeNotes,
-                                        index: index,
-                                        isDragged: _isDragged,
-                                      ),
-                                    ),
-                                    secondaryActions: <Widget>[
-                                      Container(
-                                        child: Center(
-                                          child: FlatButton(
-                                            onPressed: () {
-                                              _showMomentAlertDialog(index);
+                                        Transform.translate(
+                                          offset: Offset(30, 50),
+                                          child: Icon(
+                                            Icons.image,
+                                            color: Colors.grey,
+                                          ),
+                                        )
+                                      ],
+                                    )
+                                  : FadeTransition(
+                                      opacity: _fadeAnimation3,
+                                      child: SlideTransition(
+                                        position: _slideAnimation3,
+                                        child: Slidable(
+                                          key: ValueKey('slideItem$index'),
+                                          controller: slidableController,
+                                          actionPane:
+                                              SlidableDrawerActionPane(),
+                                          actionExtentRatio: 0.25,
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              _showNoteDraggable(context
+                                                  .read<StoredMoments>()
+                                                  .items[index]);
                                             },
-                                            child: Container(
-                                              width: 50,
-                                              decoration: BoxDecoration(
-                                                  color: Colors.red,
-                                                  borderRadius:
-                                                      BorderRadius.circular(15)),
-                                              height: 50,
-                                              child: Icon(
-                                                Icons.delete,
-                                                color: Colors.white,
-                                              ),
+                                            child: TextNote(
+                                              screenWidth: screenWidth,
+                                              screenHeight: screenHeight,
+                                              icon:
+                                                  _providerData[index].moodIcon,
+                                              title: _providerData[index].title,
+                                              activities: _providerData[index]
+                                                  .activities,
+                                              feelings:
+                                                  _providerData[index].feelings,
+                                              notes: _providerData[index]
+                                                  .addSomeNotes,
+                                              index: index,
+                                              isDragged: _isDragged,
                                             ),
                                           ),
+                                          secondaryActions: <Widget>[
+                                            Container(
+                                              child: Center(
+                                                child: FlatButton(
+                                                  onPressed: () {
+                                                    _showMomentAlertDialog(
+                                                        index);
+                                                  },
+                                                  child: Container(
+                                                    width: 50,
+                                                    decoration: BoxDecoration(
+                                                        color: Colors.red,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(15)),
+                                                    height: 50,
+                                                    child: Icon(
+                                                      Icons.delete,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            )
+                                          ],
                                         ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              );
+                                      ),
+                                    );
                             },
                             childCount:
                                 context.watch<StoredMoments>().items.length,
@@ -526,7 +506,7 @@ class _MomentsState extends State<Moments>  with SingleTickerProviderStateMixin{
                 ),
               ],
             ),
-            Navbar(  isVisible: _isVisible),
+            Navbar(isVisible: _isVisible),
             if (isSelected)
               GestureDetector(
                 onTap: () => context.read<IsPopUpOn>().togglePopUp(),

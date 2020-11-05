@@ -43,8 +43,8 @@ dev_dependencies:
     sdk: flutter
 
   # Test Sweets automation
-  # testsweets_generator: ^0.0.1+2
-  build_runner: ^1.10.4
+  build_runner:
+  testsweets_generator: ^0.0.1+2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
